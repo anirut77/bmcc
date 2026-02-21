@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-AI Startup Builder: The Masterclass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: #022c22;
+            color: white;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .bmc-cell {
+            min-height: 140px;
+            padding: 0.75rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(15, 23, 42, 0.6);
+            transition: all 0.3s ease;
+        }
+        .bmc-cell:hover { background: rgba(15, 23, 42, 0.8); }
+        .fade-in { animation: fadeIn 0.6s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        select { background-color: #1e293b; color: #f8fafc; font-size: 0.75rem; border: 1px solid #475569; }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+
+    <!-- App Header -->
+    <div class="max-w-7xl mx-auto flex justify-between items-center mb-10">
+        <div>
+            <h1 class="text-4xl font-bold text-emerald-400">Eco-AI Architect</h1>
+            <p class="text-emerald-200/70">Environmental Engineering & Business Simulation</p>
+        </div>
+        <div id="progress-container" class="flex gap-2">
+            <div class="step-dot h-3 w-3 rounded-full bg-emerald-500"></div>
+            <div class="step-dot h-3 w-3 rounded-full bg-slate-700"></div>
+            <div class="step-dot h-3 w-3 rounded-full bg-slate-700"></div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto">
+        
+        <!-- Phase 1: Innovation Selection -->
+        <div id="phase-1" class="fade-in space-y-8">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl font-semibold mb-2">เฟส 1: ออกแบบนวัตกรรมวิศวกรรม (The Core Technology)</h2>
+                <p class="text-slate-300">เลือกองค์ประกอบทางเทคนิคเพื่อสร้าง Value Proposition ของคุณ</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Water Tech -->
+                <div class="glass-card p-6 rounded-3xl border-t-4 border-blue-500">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">💧 ด้านมลพิษทางน้ำ</h3>
+                    <div class="space-y-3" id="water-choices">
+                        <label class="block p-3 rounded-xl border border-slate-700 hover:bg-white/5 cursor-pointer transition-all">
+                            <input type="radio" name="water-tech" value="iot" class="mr-2"> IoT Sensors (ตรวจวัดพื้นฐาน)
+                        </label>
+                        <label class="block p-3 rounded-xl border border-slate-700 hover:bg-white/5 cursor-pointer">
+                            <input type="radio" name="water-tech" value="ai-predict" class="mr-2"> AI Predictive (ทำนายค่า BOD ล่วงหน้า)
+                        </label>
+                        <label class="block p-3 rounded-xl border border-slate-700 hover:bg-white/5 cursor-pointer">
+                            <input type="radio" name="water-tech" value="bio-ai" class="mr-2"> Bio-AI (ใช้จุลินทรีย์ + AI ควบคุม)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Air Tech -->
+                <div class="glass-card p-6 rounded-3xl border-t-4 border-slate-400">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">🌫️ ด้านคุณภาพอากาศ</h3>
+                    <div class="space-y-3" id="air-choices">
+                        <label class="block p-3 rounded-xl border border-slate-700 hover:bg-white/5 cursor-pointer">
+                            <input type="radio" name="air-tech" value="none" checked class="mr-2"> ไม่เน้นด้านนี้
+                        </label>
+                        <label class="block p-3 rounded-xl border border-slate-700 hover:bg-white/5 cursor-pointer">
+                            <input type="radio" name="air-tech" value="vision" class="mr-2"> Vision Smoke Detection (ตรวจควันจากโดรน)
+                        </label>
+                        <label class="block p-3 rounded-xl border border-slate-700 hover:bg-white/5 cursor-pointer">
+                            <input type="radio" name="air-tech" value="modeling" class="mr-2"> Air Modeling (จำลองการกระจายมลพิษ)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Waste Tech -->
+                <div class="glass-card p-6 rounded-3xl border-t-4 border-yellow-500">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">♻️ ด้านการจัดการขยะ</h3>
+                    <div class="space-y-3" id="waste-choices">
+                        <label class="block p-3 rounded-xl border border-slate-700 hover:bg-white/5 cursor-pointer">
+                            <input type="radio" name="waste-tech" value="app" class="mr-2"> Mobile App (ระบบเรียกเก็บขยะ)
+                        </label>
+                        <label class="block p-3 rounded-xl border border-slate-700 hover:bg-white/5 cursor-pointer">
+                            <input type="radio" name="waste-tech" value="robot" class="mr-2"> Sorting Robot (แขนกลคัดแยกอัจฉริยะ)
+                        </label>
+                        <label class="block p-3 rounded-xl border border-slate-700 hover:bg-white/5 cursor-pointer">
+                            <input type="radio" name="waste-tech" value="pyro-ai" class="mr-2"> AI Pyrolysis (ควบคุมการเผาขยะเป็นพลังงาน)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center pt-8">
+                <button onclick="goToPhase2()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-900 px-12 py-4 rounded-full font-bold text-lg shadow-2xl transition-all hover:scale-105">ยืนยันองค์ประกอบนวัตกรรม</button>
+            </div>
+        </div>
+
+        <!-- Phase 2: BMC Interface -->
+        <div id="phase-2" class="hidden fade-in">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-semibold mb-2">เฟส 2: วางแผนโมเดลธุรกิจ (BMC Canvas)</h2>
+                <p class="text-slate-300">เลือกกลยุทธ์ที่ทำให้วิศวกรรมของคุณกลายเป็นธุรกิจที่ทำกำไร</p>
+            </div>
+
+            <div class="grid grid-cols-5 gap-2 min-w-[1000px] overflow-x-auto pb-4">
+                <!-- BMC Layout -->
+                <div class="col-span-1 bmc-cell rounded-tl-3xl border-emerald-500/30">
+                    <label class="text-[10px] text-emerald-400 font-bold block mb-2">KEY PARTNERS</label>
+                    <select id="bmc_kp" class="w-full rounded p-2 focus:ring-2 ring-emerald-500">
+                        <option value="">-- เลือกคู่ค้าหลัก --</option>
+                        <option value="5">กรมโรงงานอุตสาหกรรม & นิคมฯ</option>
+                        <option value="3">บริษัทขนส่งพัสดุ</option>
+                        <option value="1">ห้างสรรพสินค้าทั่วไป</option>
+                    </select>
+                </div>
+
+                <div class="col-span-1 flex flex-col gap-2">
+                    <div class="bmc-cell border-emerald-500/30">
+                        <label class="text-[10px] text-emerald-400 font-bold block mb-2">KEY ACTIVITIES</label>
+                        <select id="bmc_ka" class="w-full rounded p-2">
+                            <option value="">-- กิจกรรมหลัก --</option>
+                            <option value="5">R&D อัลกอริทึม & Calibration เซนเซอร์</option>
+                            <option value="3">การผลิตฮาร์ดแวร์จำนวนมาก</option>
+                            <option value="1">การทำการตลาดผ่าน influencer</option>
+                        </select>
+                    </div>
+                    <div class="bmc-cell border-emerald-500/30">
+                        <label class="text-[10px] text-emerald-400 font-bold block mb-2">KEY RESOURCES</label>
+                        <select id="bmc_kr" class="w-full rounded p-2">
+                            <option value="">-- ทรัพยากรหลัก --</option>
+                            <option value="5">Data Scientists & Lab สิ่งแวดล้อม</option>
+                            <option value="3">พนักงานขาย และฝ่ายลูกค้าสัมพันธ์</option>
+                            <option value="1">คลังสินค้าขนาดใหญ่</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-span-1 bmc-cell bg-emerald-500/10 border-emerald-500/50">
+                    <label class="text-[10px] text-yellow-400 font-bold block mb-2">VALUE PROPOSITIONS</label>
+                    <div id="summary-vp" class="text-xs text-white leading-relaxed font-light italic">
+                        รอนวัตกรรมจากเฟส 1...
+                    </div>
+                </div>
+
+                <div class="col-span-1 flex flex-col gap-2">
+                    <div class="bmc-cell border-emerald-500/30">
+                        <label class="text-[10px] text-emerald-400 font-bold block mb-2">CUSTOMER RELATIONSHIPS</label>
+                        <select id="bmc_cr" class="w-full rounded p-2">
+                            <option value="">-- ความสัมพันธ์ลูกค้า --</option>
+                            <option value="5">สัญญาบริการดูแลระบบ 24/7 (SLA)</option>
+                            <option value="3">การสะสมแต้มแลกของรางวัล</option>
+                            <option value="1">การขายขาด ไม่มีการติดต่อหลังการขาย</option>
+                        </select>
+                    </div>
+                    <div class="bmc-cell border-emerald-500/30">
+                        <label class="text-[10px] text-emerald-400 font-bold block mb-2">CHANNELS</label>
+                        <select id="bmc_ch" class="w-full rounded p-2">
+                            <option value="">-- ช่องทาง --</option>
+                            <option value="5">งานแสดงสินค้าอุตสาหกรรม & Direct Sales B2B</option>
+                            <option value="3">Facebook / TikTok Ads</option>
+                            <option value="1">หน้าร้านสะดวกซื้อ</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-span-1 bmc-cell rounded-tr-3xl border-emerald-500/30">
+                    <label class="text-[10px] text-emerald-400 font-bold block mb-2">CUSTOMER SEGMENTS</label>
+                    <select id="bmc_cs" class="w-full rounded p-2">
+                        <option value="">-- กลุ่มลูกค้า --</option>
+                        <option value="5">โรงงานที่มีการปล่อยน้ำเสีย/ขยะอันตราย</option>
+                        <option value="3">สำนักงานออฟฟิศในเมือง</option>
+                        <option value="1">นักศึกษาและวัยทำงาน</option>
+                    </select>
+                </div>
+
+                <!-- Bottom BMC -->
+                <div class="col-span-2 bmc-cell rounded-bl-3xl border-emerald-500/30">
+                    <label class="text-[10px] text-emerald-400 font-bold block mb-2">COST STRUCTURE</label>
+                    <select id="bmc_c_cost" class="w-full rounded p-2">
+                        <option value="">-- โครงสร้างต้นทุน --</option>
+                        <option value="5">ค่าเซิร์ฟเวอร์ Cloud & เงินเดือนทีมวิศวกร</option>
+                        <option value="3">ค่าวัตถุดิบการผลิต & ค่าขนส่ง</option>
+                        <option value="1">ค่าเช่าพื้นที่ขาย & ค่าโฆษณา</option>
+                    </select>
+                </div>
+                <div class="col-span-3 bmc-cell rounded-br-3xl border-emerald-500/30">
+                    <label class="text-[10px] text-emerald-400 font-bold block mb-2">REVENUE STREAMS</label>
+                    <select id="bmc_rs" class="w-full rounded p-2">
+                        <option value="">-- แหล่งรายได้ --</option>
+                        <option value="5">SaaS Fee (รายเดือน) & Data Insights Report</option>
+                        <option value="3">ขายขาดตัวเครื่องเซนเซอร์</option>
+                        <option value="1">รายได้จากการโฆษณาในแอป</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="text-center pt-10">
+                <button onclick="analyzeSuccess()" class="bg-yellow-500 hover:bg-yellow-400 text-slate-900 px-12 py-4 rounded-full font-bold text-xl shadow-2xl transition-all hover:scale-105">ประเมินโอกาสความสำเร็จ</button>
+            </div>
+        </div>
+
+        <!-- Phase 3: Results & Radar Chart -->
+        <div id="phase-3" class="hidden fade-in space-y-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Radar Chart Card -->
+                <div class="glass-card p-8 rounded-3xl">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Business Viability Score</h3>
+                    <div class="max-w-[400px] mx-auto">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Summary Card -->
+                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-4 gradient-text text-emerald-400" id="success-rank">กำลังประมวลผล...</h3>
+                        <div id="success-percentage" class="text-5xl font-bold mb-6 text-white">0%</div>
+                        <div id="analysis-feedback" class="space-y-4 text-slate-300">
+                            <!-- Feedback injected here -->
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-white/10">
+                        <button onclick="location.reload()" class="text-emerald-400 hover:text-emerald-300 underline font-semibold">ปรับปรุงกลยุทธ์ใหม่</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-4 rounded-2xl glass-card border border-emerald-500 shadow-2xl hidden z-50">
+        <p id="toast-text" class="font-bold text-center"></p>
+    </div>
+
+    <script>
+        let techData = {};
+        let radarChart = null;
+
+        function goToPhase2() {
+            const w = document.querySelector('input[name="water-tech"]:checked');
+            const a = document.querySelector('input[name="air-tech"]:checked');
+            const ws = document.querySelector('input[name="waste-tech"]:checked');
+
+            if (!w && !a && !ws) {
+                showToast("กรุณาเลือกนวัตกรรมอย่างน้อยหนึ่งด้าน", "text-red-400");
+                return;
+            }
+
+            techData = {
+                water: w ? w.parentElement.innerText.trim() : "None",
+                air: a ? a.parentElement.innerText.trim() : "None",
+                waste: ws ? ws.parentElement.innerText.trim() : "None"
+            };
+
+            document.getElementById('phase-1').classList.add('hidden');
+            document.getElementById('phase-2').classList.remove('hidden');
+            
+            const dots = document.querySelectorAll('.step-dot');
+            dots[1].classList.replace('bg-slate-700', 'bg-emerald-500');
+
+            // Update VP display
+            let vpHtml = `<ul class="list-disc ml-4">`;
+            if(techData.water !== "None") vpHtml += `<li>${techData.water}</li>`;
+            if(techData.air !== "None" && !techData.air.includes("ไม่เน้น")) vpHtml += `<li>${techData.air}</li>`;
+            if(techData.waste !== "None") vpHtml += `<li>${techData.waste}</li>`;
+            vpHtml += `</ul>`;
+            document.getElementById('summary-vp').innerHTML = vpHtml;
+        }
+
+        function analyzeSuccess() {
+            const selects = document.querySelectorAll('#phase-2 select');
+            let allSelected = true;
+            let bmcScores = [];
+            
+            selects.forEach(s => {
+                if(!s.value) allSelected = false;
+                bmcScores.push(parseInt(s.value) || 0);
+            });
+
+            if(!allSelected) {
+                showToast("กรุณากรอกข้อมูล BMC ให้ครบทุกช่อง", "text-orange-400");
+                return;
+            }
+
+            // Calculations for Radar Chart
+            // [Technology, Market Fit, Sustainability, Financial, Operation]
+            let scores = [0, 0, 0, 0, 0];
+            
+            // Logic for Technology (from Phase 1 & BMC KA/KR)
+            scores[0] = (bmcScores[1] + bmcScores[2]) * 8; // Max 80
+            
+            // Logic for Market Fit (BMC CS/CH)
+            scores[1] = (bmcScores[4] + bmcScores[5]) * 9; // Max 90
+            
+            // Logic for Sustainability (Eco focus)
+            scores[2] = 70 + (bmcScores[0] === 5 ? 20 : 0); // Environmental engineers usually score high here
+            
+            // Logic for Financial (Cost/Revenue)
+            scores[3] = (bmcScores[6] + bmcScores[7]) * 9;
+            
+            // Logic for Operation (Partner/Relation)
+            scores[4] = (bmcScores[0] + bmcScores[3]) * 8;
+
+            renderResults(scores);
+        }
+
+        function renderResults(scores) {
+            document.getElementById('phase-2').classList.add('hidden');
+            document.getElementById('phase-3').classList.remove('hidden');
+            document.querySelectorAll('.step-dot')[2].classList.replace('bg-slate-700', 'bg-emerald-500');
+
+            const avg = scores.reduce((a,b) => a+b) / scores.length;
+            const successPct = Math.round(avg);
+            
+            document.getElementById('success-percentage').innerText = successPct + "%";
+            
+            let rank = "";
+            let feedback = "";
+            if(successPct > 80) {
+                rank = "Green Unicorn 🦄";
+                feedback = `
+                    <p class="text-emerald-400 font-bold">ยอดเยี่ยม!</p>
+                    <p>โมเดลธุรกิจของคุณสมบูรณ์แบบ เทคโนโลยีที่เลือกสอดคล้องกับกลุ่มลูกค้าอุตสาหกรรม และโครงสร้างรายได้แบบ SaaS จะทำให้บริษัทเติบโตได้ก้าวกระโดด</p>
+                `;
+            } else if(successPct > 60) {
+                rank = "Rising Star 🌟";
+                feedback = `
+                    <p class="text-yellow-400 font-bold">มีแนวโน้มดี</p>
+                    <p>ธุรกิจสามารถอยู่รอดได้ แต่อาจต้องปรับจูนการเชื่อมโยงระหว่าง Key Activities และ Cost Structure ให้รัดกุมกว่านี้เพื่อให้กำไรสุทธิสูงขึ้น</p>
+                `;
+            } else {
+                rank = "Pivot Required ⚠️";
+                feedback = `
+                    <p class="text-red-400 font-bold">ต้องการการปรับปรุง</p>
+                    <p>ดูเหมือนว่า 'คุณค่า' ที่คุณเลือกยังเข้าไม่ถึง 'กลุ่มลูกค้า' ที่ถูกต้อง ลองเช็คว่านิคมอุตสาหกรรมเขาต้องการซื้อแบบขายขาดหรือบริการรายปี?</p>
+                `;
+            }
+
+            document.getElementById('success-rank').innerText = rank;
+            document.getElementById('analysis-feedback').innerHTML = feedback;
+
+            // Radar Chart
+            if(radarChart) radarChart.destroy();
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Technology', 'Market Fit', 'Sustainability', 'Financial', 'Operation'],
+                    datasets: [{
+                        label: 'Business Viability',
+                        data: scores,
+                        fill: true,
+                        backgroundColor: 'rgba(52, 211, 153, 0.2)',
+                        borderColor: 'rgb(52, 211, 153)',
+                        pointBackgroundColor: 'rgb(52, 211, 153)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(52, 211, 153)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255,255,255,0.1)' },
+                            grid: { color: 'rgba(255,255,255,0.1)' },
+                            pointLabels: { color: '#fff', font: { family: 'Kanit', size: 12 } },
+                            ticks: { display: false, max: 100, min: 0 }
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        function showToast(text, colorClass) {
+            const toast = document.getElementById('toast');
+            const txt = document.getElementById('toast-text');
+            txt.innerText = text;
+            txt.className = "font-bold text-center " + colorClass;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3000);
+        }
+    </script>
+</body>
+</html>
